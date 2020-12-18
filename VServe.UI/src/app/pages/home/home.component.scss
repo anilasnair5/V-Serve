@@ -1,0 +1,75 @@
+@import "./../../../../node_modules/startbootstrap-new-age/css/new-age.min.css";
+.content {
+  margin-top: -130px;
+  color: white;
+}
+.container
+{
+    font-size: large;
+    color: blanchedalmond;
+}
+#searchbox .input-group {
+    margin-bottom: 30px;
+}
+#searchbox .input-group select {
+    height: 70px;
+    font-size: large;
+   
+}
+#searchbox .input-group input {
+    height: 70px;
+    font-size: large;
+   
+}
+#searchbox .input-group button
+{
+    width:70px;
+}
+#searchbox .input-group select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 96% !important;
+   
+  }
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 400px;
+
+        .modal-content {
+            padding: 1rem;
+        }
+    }
+}
+
+.modal-header {
+    .close {
+        margin-top: -1.5rem;
+    }
+}
+
+.form-title {
+    margin: -2rem 0rem 2rem;
+}
+
+.btn-round {
+    border-radius: 3rem;
+}
+
+.delimiter {
+    padding: 1rem;
+}
+
+.social-buttons {
+    .btn {
+        margin: 0 0.5rem 1rem;
+    }
+}
+
+.signup-section {
+    padding: 0.3rem 0rem;
+}
+
+.d-block-none {
+    display: none !important;
+}

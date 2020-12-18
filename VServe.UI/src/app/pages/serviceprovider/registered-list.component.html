@@ -1,0 +1,123 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <app-side-bar></app-side-bar>
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+      <app-nav-bar></app-nav-bar>
+      <!-- Begin Page Content -->
+      <div class="container-fluid" style="margin-top: -10px;">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+          <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm bg-gradient"><i
+                          class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+        </div>
+        <!-- Content Row -->
+        <div class="row" style="margin-top:-20px;">
+          <!-- Content Column -->
+          <div class="col-lg-12 mb-4">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Inbox Requests</h6>
+              </div>
+              <!-- In box Page-->
+              <div class="row" *ngIf="isDataExists" style="min-height: 450px;">
+                <!-- BEGIN INBOX -->
+                <div class="col-md-12">
+                  <div class="grid email">
+                    <div class="grid-body">
+                      <div class="row">
+
+                        <!-- BEGIN INBOX CONTENT -->
+                        <div class="col-md-12">
+                          <div class="padding"></div>
+
+                          <div class="table-responsive">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th class="name">Full Name</th>
+                                  <th class="subject">Customer Id</th>
+                                  <th class="subject">Category</th>
+                                  <th class="subject">Title</th>
+                                  <th class="subject" *ngIf="NeedStatusColumn">Application Status</th>
+                                  <th class="subject"></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr
+                                  *ngFor="let sprovider of splist | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let i = index">
+                                  <td class="subject">{{sprovider.fullName}}
+                                  </td>
+                                  <td class="subject">{{sprovider.custId}}</td>
+                                  <td class="subject">{{sprovider.serviceCategory}}</td>
+                                  <td class="subject">{{sprovider.jobTitle}}</td>
+                                  <td class="subject" *ngIf="NeedStatusColumn">{{sprovider.serviceProviderStatus.status}}</td>
+                                  <!--td class="time" style="width:50%;">{{sprovider.jobDescription}}</td-->
+                                  <td>
+                                    <a class="d-none d-sm-inline-block btn btn-sm btn-primary bg-gradient"
+                                      href="dashboard/spdetails?spid={{sprovider.serviceProviderId}}&&status={{status}}"><i
+                                        class="fas fa-sm fa-sm text-white-50"></i><span style="color: white;">More</span></a>
+                                  </td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                          <ngb-pagination [collectionSize]="splist.length" [(page)]="page" [maxSize]="50"
+                            [boundaryLinks]="true" [ellipses]="true" [pageSize]="pageSize" *ngIf="splist.length>10">
+                          </ngb-pagination>
+
+                          <!--pagination -->
+                        </div>
+                        <!-- END INBOX CONTENT -->
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END INBOX -->
+                </div>
+              </div>
+              <!-- Inbox Page-->
+              <div class="row" *ngIf="!isDataExists" style="min-height: 450px;">
+                <div class="col-md-12">
+                  <div class="grid email">
+                    <div class="grid-body">
+                      <div class="row">
+                        No Applications received yet
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; vserve.com 2020</span>
+        </div>
+      </div>
+    </footer>
+    <!-- End of Footer -->
+
+  </div>
+  <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>

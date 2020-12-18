@@ -1,0 +1,109 @@
+<app-nav></app-nav>
+<header class="masthead">
+    <div class="container py-5">
+        <div class="row mb-5" style="margin-top: 50px;">
+            <div class="mt-5" style="width:100%;">
+                <!-- Topbar Search -->
+                <div class="input-group">
+                    <select class="form-control bg-light border-0 small" aria-label="Category"
+                        aria-describedby="basic-addon2" name="category" [(ngModel)]="category">
+                        <option placeholder="">Services</option>
+                        <option *ngFor="let eachCategory of serviceCategoryList"
+                                                            [ngValue]="eachCategory">{{eachCategory}}</option>
+                    </select>
+                    <input type="text" class="form-control bg-light border-0 small" name="searchtext"
+                        placeholder="Your Location..." aria-label="Search" aria-describedby="basic-addon2"
+                        style="min-width: 65%;" [(ngModel)]="searchtext">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary bg-gradient" type="button" (click)="searchbuttonclick()">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row" style="width:100%;margin-top: -60px;">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-7">
+                <alert></alert>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row" *ngIf="isDataExist" style="width:100%;margin-top: 10px;">
+            <ul class="list-group shadow">
+                <li class="list-group-item"
+                    *ngFor="let spresult of searchresult | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let i = index">
+                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                        <div class="media-body order-2 order-lg-1">
+                            <h5 class="mt-0 font-weight-bold mb-2 text-black">
+                                <i class="fa fa-check" aria-hidden="true" style="color: green;"
+                                    *ngIf="spresult.serviceProviderStatus.status=='Verified'"></i>
+                                <i class="fa fa-ban" aria-hidden="true"
+                                    *ngIf="spresult.serviceProviderStatus.status=='Rejected'" style="color:red;"></i>
+                                <i class="fa fa-history" aria-hidden="true"
+                                    *ngIf="spresult.serviceProviderStatus.status=='New'" style="color:royalblue;"></i>
+
+                                {{spresult.fullName}} -
+                                {{spresult.jobTitle}}, {{spresult.experience}} Experience
+                               <span class="d-flex justify-content-end"> <a href="#{{spresult.mobileNumber}}"><i class="fa fa-phone"
+                                            style='color:green;' aria-hidden="true"></i></a></span>
+                            </h5>
+
+                            <p class="font-italic text-muted mb-0 small">{{spresult.jobDescription}}
+                            </p>
+                            <div class="d-flex align-items-center justify-content-between mt-1">
+                                <h6 class="font-weight-bold my-2 text-black">{{spresult.serviceCategory}}</h6>
+                                <!--ul class="list-inline small">
+                                            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                            <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                            <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                                        </ul-->
+
+                                <h1 class="text-primary mt-1">
+                                    <ngb-rating [max]="5" [rate]="spresult.serviceProviderRate" [readonly]="false"
+                                        (rateChange)="onRateChange($event,spresult.serviceProviderId,i)">
+                                    </ngb-rating>
+                                    <!--ng-template let-fill="fill">
+                                                    <span class="star color{{spresult.serviceProviderRate}}" [class.filled]="fill === 100">&#9733;</span>
+                                                  </ng-template-->
+                                </h1>
+                            </div>
+                            <div class="row mt-1 h-50">
+                                <div class="col-sm-7"><a
+                                        href="search/review?spid={{spresult.serviceProviderId}}&&searchtext={{searchtext}}"
+                                        class="float-left">Reviews({{spresult.serviceProviderFeedbacks.length}})</a>
+                                </div>
+                                <div class="col-sm-5 justify-content-right d-flex justify-content-end">
+                                    <button class="btn btn-primary rounded-0" *ngIf="showbtn && i == selectedrow"
+                                        (click)="SetRate()">OK?</button>
+                                    <button class="btn btn-primary ml-2 rounded-0" *ngIf="showbtn && i == selectedrow"
+                                        (click)="cancelRate()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <img src="{{photourl}}{{spresult.photoUploaded}}" alt="Generic placeholder image"
+                            class="ml-lg-5 order-1 order-lg-2 w-25 h-25">
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <div class="row" *ngIf="isDataExist">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-5 pagination">
+                <ngb-pagination [collectionSize]="searchresult.length" [(page)]="page" [maxSize]="3"
+                    [boundaryLinks]="true" [ellipses]="true" *ngIf="isDataExist" [pageSize]="pageSize" id="pagination"></ngb-pagination>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row" *ngIf="!isDataExist">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-3 f">No matching found...</div>
+        </div>
+    </div>
+</header>
+<app-footer></app-footer>
