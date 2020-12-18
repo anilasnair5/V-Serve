@@ -1,0 +1,53 @@
+.text-gray {
+    color: #aaa;
+}
+.text-black
+{
+    color: black;;
+}
+img {
+    height: 170px;
+    width: 140px
+}
+header.masthead
+{
+    position: relative;
+    height: 1500px;
+}
+.input-group {
+    margin-bottom: 30px;
+}
+.input-group select,input {
+    height: 70px;
+    font-size: large;
+   
+}
+.input-group button
+{
+    width:70px;
+}
+.input-group select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 96% !important;
+   
+  }
+.twitter-typeahead { width: 100%; } 
+
+/*.pagination
+{
+    width:500px;
+    height: 200px;
+}
+.pagination .page-item .page-link {
+    border-radius: 0 !important;
+  }
+  
+.pagination .page-link {
+    border-top-style: none !important;
+    border-bottom-style: none !important;
+    background-color: #f6f6f6 !important;
+    color: black !important;
+  }
+  */

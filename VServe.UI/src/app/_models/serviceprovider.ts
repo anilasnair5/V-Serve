@@ -1,0 +1,36 @@
+export class ServiceProvider {
+  serviceProviderId:string;
+  fullName: string;
+  gender: string;
+  dateOfBitrth: string;
+  mobileNumber: string;
+  email: string;
+  pocMobile:string;
+  pocName:string;
+  identityType: string;
+  identityNumber: string;
+  currentlyEmployed: string;  
+  bankId: string;
+  custId: string;
+  preferedLocation: string;
+  category: string;
+  presentAddress: string;
+  permanentAddress: string;  
+  emergencyContactName: string;
+  emergencyContactNumber: string;
+  jobTitle: string;
+  jobDescription: string;
+  experience: string;
+  expectedPay: string;
+  VendorAnswers:string;  
+  supportingDocuments:File[];
+  Photo:File;
+  userId:string;
+  answers:any[];
+  serviceProviderRate:number;
+  serviceProviderStatus:any;
+  documentsUploaded:any;
+  photoUploaded:string;
+  serviceProviderFeedbacks:any;
+  serviceCategory:string;
+}

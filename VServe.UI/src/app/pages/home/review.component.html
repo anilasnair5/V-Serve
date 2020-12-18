@@ -1,0 +1,66 @@
+<app-nav></app-nav>
+<header class="masthead">
+    <div class="container py-5">
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-5">
+                <alert></alert>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row d-flex justify-content-center mt-100 mb-100" style="margin-top: 20px;">
+            <form [formGroup]="reviewForm" (ngSubmit)="PostFeedback();">
+                <div class="form-group">
+                    <textarea cols="90" rows="5" formControlName="comment" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.comment.errors }"></textarea>
+                    <div *ngIf="submitted && f.comment.errors" class="invalid-feedback" style="color: white;">
+                        <div *ngIf="f.comment.errors.required">Before submission please enter your comment.</div>
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-outline btn-xl js-scroll-trigger" type="submit">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Send
+                    </button>
+                    <a class="btn btn-outline btn-xl js-scroll-trigger" (click)="gotoSearchPage();">Back</a>
+                </div>
+            </form>
+        </div>
+        <div class="row d-flex justify-content-center mt-100 mb-100" style="margin-top: 20px;" *ngIf="isDataExist">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Reviews</h4>
+                    </div>
+                    <div class="comment-widgets">
+                        <!-- Comment Row -->
+                        <div class="d-flex flex-row comment-row m-t-0"
+                            *ngFor="let feed of feedbacks | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize;let i = index">
+                            <div class="p-2"><img src="../../../assets/img/1.jpg" alt="user" width="50"
+                                    class="rounded-circle"></div>
+                            <div class="comment-text w-100">
+                                <h6 class="font-medium">{{feed.username}}</h6> <span
+                                    class="m-b-15 d-block">{{feed.feedback}} </span>
+                                <div class="comment-footer"> <span class="text-muted float-right">August 1, 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="isDataExist && feedbacks.length>pageSize" style="margin-top:10px;">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <ngb-pagination [collectionSize]="feedbacks.length" [(page)]="page" [maxSize]="10" [boundaryLinks]="true"
+                    [ellipses]="true" *ngIf="isDataExist" [pageSize]="pageSize"></ngb-pagination>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row" *ngIf="!isDataExist">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-3 f">No reviews yet...</div>
+        </div>
+    </div>
+</header>
+<app-footer></app-footer>
